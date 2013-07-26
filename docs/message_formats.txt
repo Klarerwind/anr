@@ -1,0 +1,93 @@
+// game updates
+
+locations:
+// positive number means hosted on card of that number
+// negative number means location
+
+// runner
+Location.R_ID
+Location.GRIP
+Location.STACK
+Location.HEAP
+Location.R_PLAYED
+Location.R_SCORE_AREA
+
+Location.C_ID
+Location.HQ
+Location.RD
+Location.ARCHIVES
+Location.C_PLAYED
+Location.C_SCORE_AREA
+
+// sample corp game view object
+var abc = {
+  turn: 13,    // odd so it's the corp's turn
+  phase: 31,
+  sub_phase: ?,
+  corp: {
+    credits: 10,
+    clicks: 2,
+    hand: [cards],    // array of card
+    deck: 36,    // number of cards in stack
+    trash: [cards],   // array of card objects
+    remotes: [
+      [[in_server_cards],[ICE_cards]],  // remote server 1
+      [[in_server_cards],[ICE_cards]],  // remote server 2
+      [[in_server_cards],[ICE_cards]]   // remote server 3
+    ],
+    played: [cards and tokens]
+  },
+  runner: {
+    credits: 10,
+    clicks: 0,
+    hand: [cards],
+    deck: 40,
+    trash: [cards],
+    played: [cards and tokens]
+  }
+};
+
+
+
+// sample permission:true card
+{
+  id: 135         // random persistent ID (only visible when permission:true)
+  type: 'card',
+  db_id: 120      // to key into list of card effects
+  permission: true, (permission to view the card ID and image)
+  faceup: true,     (currently face up; visible by both players)
+  preview: 'http://some_image_url_to_card_front/'
+}
+
+// sample Djinn hosting another card
+{
+  id: 136         // random persistent ID (only visible when permission:true)
+  type: 'card',
+  db_id: 120      // to key into list of card effects
+  permission: true, (permission to view the card ID and image)
+  faceup: true,     (currently face up; visible by both players)
+  hosting: [137],
+  preview: 'http://some_image_url_to_card_front/'
+}
+// hosted virus program
+{
+  id: 137         // random persistent ID (only visible when permission:true)
+  type: 'card',
+  db_id: 120      // to key into list of card effects
+  permission: true, (permission to view the card ID and image)
+  faceup: true,     (currently face up; visible by both players)
+  preview: 'http://some_image_url_to_card_front/'
+}
+
+// sample permission:false card
+{
+  type: 'card',
+  permission: false,
+  faceup: false,   // or false (current state)
+  preview: 'http://some_image_url_to_card_back/'
+}
+
+{
+  type: '',
+  subtype: '',
+}
