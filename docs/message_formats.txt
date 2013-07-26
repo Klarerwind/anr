@@ -1,0 +1,110 @@
+// game updates
+
+locations:
+// positive number means hosted on card of that number
+// negative number means location
+
+// tricky cards
+Ice Carver
+
+// runner
+Location.R_ID
+Location.GRIP
+Location.STACK
+Location.HEAP
+Location.R_PLAYED
+Location.R_SCORE_AREA
+
+Location.C_ID
+Location.HQ
+Location.RD
+Location.ARCHIVES
+Location.C_PLAYED
+Location.C_SCORE_AREA
+
+Events.BEGIN_TURN ()
+Events.END_TURN ()
+Events.BEGIN_RUN ()
+Events.END_RUN ()
+Events.DRAW_CARD (card, from, to)
+Events.GAIN_CREDIT
+Events.INSTALL_CARD (card, from, to)
+Events.APPROACH_ICE ()
+Events.ENCOUNTER_ICE ()
+Events.BYPASS_ICE ()
+
+// sample corp game view object
+var abc = {
+  turn: 13,    // odd so it's the corp's turn
+  phase: 31,
+  sub_phase: ?,
+  corp: {
+    credits: 10,
+    clicks: 2,
+    hand: [cards],    // array of card
+    deck: 36,    // number of cards in stack
+    trash: [cards],   // array of card objects
+    remotes: [
+      [[in_server_cards],[ICE_cards]],  // remote server 1
+      [[in_server_cards],[ICE_cards]],  // remote server 2
+      [[in_server_cards],[ICE_cards]]   // remote server 3
+    ],
+    played: [cards and tokens]
+  },
+  runner: {
+    credits: 10,
+    clicks: 0,
+    hand: [cards],
+    deck: 40,
+    trash: [cards],
+    played: [cards and tokens]
+  }
+};
+
+
+
+// sample permission:true card
+{
+  id: 135         // random persistent ID (only visible when permission:true)
+  type: 'card',
+  db_id: 120      // to key into list of card effects
+  permission: true, // permission to view the card ID and image
+  faceup: true,     // currently face up; visible by both players
+  token_count: 2,            // number of tokens
+  token_type: 'advancement', // or virus, power, agenda. undefined unless token_count > 0
+  preview: 'http://some_image_url_to_card_front/'
+}
+
+// sample Djinn hosting another card
+{
+  id: 136
+  type: 'card',
+  db_id: 120
+  permission: true,
+  faceup: true,
+  hosting: [137],
+  preview: 'http://some_image_url_to_card_front/'
+}
+
+// hosted virus program
+{
+  id: 137
+  type: 'card',
+  db_id: 120
+  permission: true,
+  faceup: true,
+  preview: 'http://some_image_url_to_card_front/'
+}
+
+// sample permission:false card
+{
+  type: 'card',
+  permission: false,
+  faceup: false,
+  preview: 'http://some_image_url_to_card_back/'
+}
+
+{
+  type: '',
+  subtype: '',
+}
