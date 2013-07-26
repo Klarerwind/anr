@@ -4,6 +4,9 @@ locations:
 // positive number means hosted on card of that number
 // negative number means location
 
+// tricky cards
+Ice Carver
+
 // runner
 Location.R_ID
 Location.GRIP
@@ -18,6 +21,17 @@ Location.RD
 Location.ARCHIVES
 Location.C_PLAYED
 Location.C_SCORE_AREA
+
+Events.BEGIN_TURN ()
+Events.END_TURN ()
+Events.BEGIN_RUN ()
+Events.END_RUN ()
+Events.DRAW_CARD (card, from, to)
+Events.GAIN_CREDIT
+Events.INSTALL_CARD (card, from, to)
+Events.APPROACH_ICE ()
+Events.ENCOUNTER_ICE ()
+Events.BYPASS_ICE ()
 
 // sample corp game view object
 var abc = {
@@ -54,28 +68,31 @@ var abc = {
   id: 135         // random persistent ID (only visible when permission:true)
   type: 'card',
   db_id: 120      // to key into list of card effects
-  permission: true, (permission to view the card ID and image)
-  faceup: true,     (currently face up; visible by both players)
+  permission: true, // permission to view the card ID and image
+  faceup: true,     // currently face up; visible by both players
+  token_count: 2,            // number of tokens
+  token_type: 'advancement', // or virus, power, agenda. undefined unless token_count > 0
   preview: 'http://some_image_url_to_card_front/'
 }
 
 // sample Djinn hosting another card
 {
-  id: 136         // random persistent ID (only visible when permission:true)
+  id: 136
   type: 'card',
-  db_id: 120      // to key into list of card effects
-  permission: true, (permission to view the card ID and image)
-  faceup: true,     (currently face up; visible by both players)
+  db_id: 120
+  permission: true,
+  faceup: true,
   hosting: [137],
   preview: 'http://some_image_url_to_card_front/'
 }
+
 // hosted virus program
 {
-  id: 137         // random persistent ID (only visible when permission:true)
+  id: 137
   type: 'card',
-  db_id: 120      // to key into list of card effects
-  permission: true, (permission to view the card ID and image)
-  faceup: true,     (currently face up; visible by both players)
+  db_id: 120
+  permission: true,
+  faceup: true,
   preview: 'http://some_image_url_to_card_front/'
 }
 
@@ -83,7 +100,7 @@ var abc = {
 {
   type: 'card',
   permission: false,
-  faceup: false,   // or false (current state)
+  faceup: false,
   preview: 'http://some_image_url_to_card_back/'
 }
 
