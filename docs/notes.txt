@@ -1,3 +1,0 @@
-store games in redis DB
-key = game ID
-value = game state JSON string
